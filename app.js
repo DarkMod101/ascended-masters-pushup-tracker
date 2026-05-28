@@ -12,37 +12,37 @@ const exercises = [
   {
     name: "Standard Push-Up",
     desc: "Close hand placement parallel to the body and near the ribs.",
-    image: "assets/images/standard-pushup.png"
+    image: "standard-pushup.png"
   },
   {
     name: "Finger Root Push-Up",
     desc: "Perform the push-up on the roots of the fingers for greater stability and strength.",
-    image: "assets/images/finger-root-pushup.png"
+    image: "finger-root-pushup.png"
   },
   {
     name: "Diamond Push-Up",
     desc: "Thumbs and index fingers form a diamond shape to target triceps and inner chest.",
-    image: "assets/images/diamond-pushup.png"
+    image: "diamond-pushup.png"
   },
   {
     name: "Decline Push-Up",
     desc: "Feet elevated to target upper chest and shoulders.",
-    image: "assets/images/decline-pushup.png"
+    image: "decline-pushup.png"
   },
   {
     name: "Inclined Push-Up",
     desc: "Hands elevated on a surface to reduce resistance and improve control.",
-    image: "assets/images/incline-pushup.png"
+    image: "incline-pushup.png"
   },
   {
     name: "Explosive Push-Up",
     desc: "Push with explosive force so the hands leave the ground.",
-    image: "assets/images/explosive-pushup.png"
+    image: "explosive-pushup.png"
   },
   {
     name: "Headstand Push-Up",
     desc: "Wall-supported vertical pressing movement for shoulders and triceps.",
-    image: "assets/images/headstand-pushup.png"
+    image: "headstand-pushup.png"
   }
 ];
 
