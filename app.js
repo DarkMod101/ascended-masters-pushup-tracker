@@ -200,9 +200,11 @@ function renderLog() {
     .forEach(session => {
       const div = document.createElement("div");
 
-      div.className = "session-item";
+      div.className = "exercise-card";
 
       div.innerHTML = `
+      <img src="${session.image}" class="exercise-image">
+      
         <h3>${session.name}</h3>
         <p>
           Reps: ${session.reps} |
