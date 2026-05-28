@@ -120,7 +120,7 @@ function renderExercises() {
 
       updateStats();
       renderLog();
-
+renderPerformanceChart();
       repsInput.value = "";
       setsInput.value = "";
       notesInput.value = "";
@@ -259,3 +259,62 @@ mealImageInput.addEventListener("change", e => {
 renderExercises();
 renderLog();
 updateStats();
+
+function renderPerformanceChart() {
+  const canvas = document.getElementById("performanceChart");
+  if (!canvas || typeof Chart === "undefined") return;
+
+  const dailyTotals = {};
+
+  sessions.forEach(session => {
+    const day = new Date(session.date).toLocaleDateString();
+
+    if (!dailyTotals[day]) {
+      dailyTotals[day] = 0;
+    }
+
+    dailyTotals[day] += session.reps;
+  });
+
+  const labels = Object.keys(dailyTotals);
+  const data = Object.values(dailyTotals);
+
+  new Chart(canvas, {
+    type: "line",
+    data: {
+      labels,
+      datasets: [
+        {
+          label: "Daily Reps",
+          data,
+          borderWidth: 2,
+          tension: 0.35
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          labels: {
+            color: "#d7d7d7"
+          }
+        }
+      },
+      scales: {
+        x: {
+          ticks: {
+            color: "#a8a8a8"
+          }
+        },
+        y: {
+          ticks: {
+            color: "#a8a8a8"
+          }
+        }
+      }
+    }
+  });
+}
+
+renderPerformanceChart();
