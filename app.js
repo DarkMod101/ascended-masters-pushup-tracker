@@ -235,26 +235,7 @@ tabs.forEach(tab => {
   });
 });
 
-const mealImageInput =
-  document.getElementById("mealImageInput");
 
-const mealPreview =
-  document.getElementById("mealPreview");
-
-mealImageInput.addEventListener("change", e => {
-  const file = e.target.files[0];
-
-  if (!file) return;
-
-  const reader = new FileReader();
-
-  reader.onload = event => {
-    mealPreview.src = event.target.result;
-    mealPreview.style.display = "block";
-  };
-
-  reader.readAsDataURL(file);
-});
 
 renderExercises();
 renderLog();
