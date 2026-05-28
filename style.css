@@ -56,6 +56,12 @@ body {
     0 18px 44px rgba(0,0,0,.55);
 }
 
+.logo-mark img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 .eyebrow {
   margin: 0 0 5px;
   color: var(--silver);
