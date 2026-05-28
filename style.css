@@ -444,3 +444,16 @@ th {
 .timer-btn:hover {
   background: #3b3b3b;
 }
+
+.reset-wrapper {
+  margin: 18px 0 22px;
+  display: flex;
+  justify-content: center;
+}
+
+.reset-data-btn {
+  width: 100%;
+  max-width: 360px;
+  padding: 14px 18px;
+  border-radius: 18px;
+}
