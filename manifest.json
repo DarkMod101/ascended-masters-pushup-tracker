@@ -8,10 +8,11 @@
   "orientation": "portrait",
   "description": "Dark metallic push-up tracker for discipline, recovery, progression, and ascension.",
   "icons": [
-    {
-  "src": "icon.png",
-  "sizes": "512x512",
-  "type": "image/png"
-}
-  ]
+  {
+    "src": "assets/icons/icon-new.png",
+    "sizes": "512x512",
+    "type": "image/png",
+    "purpose": "any maskable"
+  }
+]
 }
