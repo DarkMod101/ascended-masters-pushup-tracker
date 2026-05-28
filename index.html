@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#050505" />
+  <title>Ascended Masters Push Up Tracker</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <main class="app">
+
+    <header class="hero">
+      <div class="logo-mark">AM</div>
+      <div>
+        <p class="eyebrow">Dedication Tracker</p>
+        <h1>Ascended Masters Push Up Tracker</h1>
+        <p class="subtitle">Dark metallic push-up tracking for strength, discipline, breath recovery, and progression.</p>
+      </div>
+    </header>
+
+    <section class="quote-box">
+      <p id="quoteText">“Discipline is the bridge between pain and ascension.”</p>
+      <button id="newQuoteBtn">New Quote</button>
+    </section>
+
+    <section class="dashboard">
+      <div class="stat-card">
+        <span>Total Reps</span>
+        <strong id="totalReps">0</strong>
+      </div>
+      <div class="stat-card">
+        <span>Total Sets</span>
+        <strong id="totalSets">0</strong>
+      </div>
+      <div class="stat-card">
+        <span>Sessions</span>
+        <strong id="totalSessions">0</strong>
+      </div>
+      <div class="stat-card">
+        <span>Rest Days</span>
+        <strong id="restDays">0</strong>
+      </div>
+    </section>
+
+    <nav class="tabs">
+      <button class="tab active" data-tab="exercises">Exercises</button>
+      <button class="tab" data-tab="log">Log</button>
+      <button class="tab" data-tab="tips">Tips</button>
+      <button class="tab" data-tab="nutrition">Nutrition</button>
+    </nav>
+
+    <section id="exercises" class="tab-panel active">
+      <h2>Push-Up Variations</h2>
+      <div id="exerciseList" class="exercise-list"></div>
+    </section>
+
+    <section id="log" class="tab-panel">
+      <h2>Training Log</h2>
+      <div id="sessionLog" class="session-log"></div>
+    </section>
+
+    <section id="tips" class="tab-panel">
+      <h2>Technique & Safety</h2>
+
+      <div class="info-card">
+        <h3>Push-Up Form Tips</h3>
+        <ul>
+          <li>Keep your body aligned from head to heels.</li>
+          <li>Keep elbows controlled, not wildly flared.</li>
+          <li>Brace your core and glutes during every rep.</li>
+          <li>Control the lowering phase. Do not collapse.</li>
+          <li>Stop if you feel sharp wrist, shoulder, neck, or elbow pain.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="nutrition" class="tab-panel">
+      <h2>Nutrition & Recovery</h2>
+
+      <div class="info-card">
+        <label class="upload-box">
+          Upload Recovery Meal Picture
+          <input id="mealImageInput" type="file" accept="image/*" />
+        </label>
+        <img id="mealPreview" class="meal-preview" alt="" />
+      </div>
+
+      <div class="info-card">
+        <h3>Basic Recovery Foods</h3>
+        <table>
+          <tr>
+            <th>Food</th>
+            <th>Recovery Benefit</th>
+          </tr>
+          <tr>
+            <td>Chicken / Turkey</td>
+            <td>Lean protein for muscle repair</td>
+          </tr>
+          <tr>
+            <td>Eggs</td>
+            <td>Protein and amino acids</td>
+          </tr>
+          <tr>
+            <td>Rice / Potatoes</td>
+            <td>Restores workout energy</td>
+          </tr>
+          <tr>
+            <td>Bananas</td>
+            <td>Potassium and muscle function</td>
+          </tr>
+          <tr>
+            <td>Milk / Yogurt</td>
+            <td>Protein, carbs, and recovery support</td>
+          </tr>
+          <tr>
+            <td>Water</td>
+            <td>Hydration and performance</td>
+          </tr>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <template id="exerciseTemplate">
+    <article class="exercise-card">
+      <img class="exercise-img" src="" alt="" />
+
+      <div class="exercise-content">
+        <h3></h3>
+        <p class="exercise-desc"></p>
+
+        <div class="input-row">
+          <label>Reps <input class="reps-input" type="number" min="0" /></label>
+          <label>Sets <input class="sets-input" type="number" min="0" /></label>
+        </div>
+
+        <div class="timer-grid">
+          <div class="timer-box">
+            <span>Workout Timer</span>
+            <strong class="workout-time">00:00</strong>
+            <div>
+              <button class="start-workout">Start</button>
+              <button class="pause-workout">Pause</button>
+              <button class="reset-workout">Reset</button>
+            </div>
+          </div>
+
+          <div class="timer-box">
+            <span>Breath Recovery</span>
+            <strong class="recovery-time">00:00</strong>
+            <div>
+              <button class="start-recovery">Start</button>
+              <button class="pause-recovery">Pause</button>
+              <button class="reset-recovery">Reset</button>
+            </div>
+          </div>
+        </div>
+
+        <textarea class="notes-input" placeholder="Notes: breath recovery, soreness, form, mindset..."></textarea>
+
+        <button class="save-session">Save Session</button>
+      </div>
+    </article>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
