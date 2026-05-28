@@ -104,6 +104,7 @@ function renderExercises() {
 
       const entry = {
         name: exercise.name,
+        image: exercise.image,
         reps,
         sets,
         notes,
