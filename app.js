@@ -299,3 +299,23 @@ function renderPerformanceChart() {
 }
 
 renderPerformanceChart();
+
+const resetDataBtn = document.getElementById("resetDataBtn");
+
+resetDataBtn.addEventListener("click", () => {
+  const confirmed = confirm(
+    "Are you sure you want to reset all stats and workout history?"
+  );
+
+  if (!confirmed) return;
+
+  localStorage.removeItem("sessions");
+
+  sessions = [];
+
+  updateStats();
+  renderLog();
+  renderPerformanceChart();
+
+  alert("All stats reset.");
+});
