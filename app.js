@@ -1,0 +1,258 @@
+const quotes = [
+  "Discipline is the bridge between pain and ascension.",
+  "The body obeys the mind that refuses surrender.",
+  "Power is built through repetition and control.",
+  "Your limits are waiting to be broken.",
+  "Pain fades. Mastery remains.",
+  "Breath, focus, movement, ascension.",
+  "Strength begins where excuses end."
+];
+
+const exercises = [
+  {
+    name: "Standard Push-Up",
+    desc: "Close hand placement parallel to the body and near the ribs.",
+    image: "assets/images/standard-pushup.png"
+  },
+  {
+    name: "Finger Root Push-Up",
+    desc: "Perform the push-up on the roots of the fingers for greater stability and strength.",
+    image: "assets/images/finger-root-pushup.png"
+  },
+  {
+    name: "Diamond Push-Up",
+    desc: "Thumbs and index fingers form a diamond shape to target triceps and inner chest.",
+    image: "assets/images/diamond-pushup.png"
+  },
+  {
+    name: "Decline Push-Up",
+    desc: "Feet elevated to target upper chest and shoulders.",
+    image: "assets/images/decline-pushup.png"
+  },
+  {
+    name: "Inclined Push-Up",
+    desc: "Hands elevated on a surface to reduce resistance and improve control.",
+    image: "assets/images/incline-pushup.png"
+  },
+  {
+    name: "Explosive Push-Up",
+    desc: "Push with explosive force so the hands leave the ground.",
+    image: "assets/images/explosive-pushup.png"
+  },
+  {
+    name: "Headstand Push-Up",
+    desc: "Wall-supported vertical pressing movement for shoulders and triceps.",
+    image: "assets/images/headstand-pushup.png"
+  }
+];
+
+const quoteText = document.getElementById("quoteText");
+const newQuoteBtn = document.getElementById("newQuoteBtn");
+const exerciseList = document.getElementById("exerciseList");
+const sessionLog = document.getElementById("sessionLog");
+
+const totalRepsEl = document.getElementById("totalReps");
+const totalSetsEl = document.getElementById("totalSets");
+const totalSessionsEl = document.getElementById("totalSessions");
+const restDaysEl = document.getElementById("restDays");
+
+newQuoteBtn.addEventListener("click", randomQuote);
+
+function randomQuote() {
+  const random = quotes[Math.floor(Math.random() * quotes.length)];
+  quoteText.textContent = `“${random}”`;
+}
+
+randomQuote();
+
+const template = document.getElementById("exerciseTemplate");
+
+let sessions = JSON.parse(localStorage.getItem("ascensionSessions")) || [];
+
+function renderExercises() {
+  exercises.forEach((exercise, index) => {
+    const clone = template.content.cloneNode(true);
+
+    const img = clone.querySelector(".exercise-img");
+    img.src = exercise.image;
+
+    clone.querySelector("h3").textContent = exercise.name;
+    clone.querySelector(".exercise-desc").textContent = exercise.desc;
+
+    const repsInput = clone.querySelector(".reps-input");
+    const setsInput = clone.querySelector(".sets-input");
+    const notesInput = clone.querySelector(".notes-input");
+
+    setupTimer(
+      clone.querySelector(".workout-time"),
+      clone.querySelector(".start-workout"),
+      clone.querySelector(".pause-workout"),
+      clone.querySelector(".reset-workout")
+    );
+
+    setupTimer(
+      clone.querySelector(".recovery-time"),
+      clone.querySelector(".start-recovery"),
+      clone.querySelector(".pause-recovery"),
+      clone.querySelector(".reset-recovery")
+    );
+
+    clone.querySelector(".save-session").addEventListener("click", () => {
+      const reps = Number(repsInput.value || 0);
+      const sets = Number(setsInput.value || 0);
+      const notes = notesInput.value;
+
+      const entry = {
+        name: exercise.name,
+        reps,
+        sets,
+        notes,
+        date: new Date().toLocaleString()
+      };
+
+      sessions.push(entry);
+
+      localStorage.setItem(
+        "ascensionSessions",
+        JSON.stringify(sessions)
+      );
+
+      updateStats();
+      renderLog();
+
+      repsInput.value = "";
+      setsInput.value = "";
+      notesInput.value = "";
+
+      alert("Session Saved");
+    });
+
+    exerciseList.appendChild(clone);
+  });
+}
+
+function setupTimer(display, startBtn, pauseBtn, resetBtn) {
+  let seconds = 0;
+  let interval = null;
+
+  function updateDisplay() {
+    const mins = String(Math.floor(seconds / 60)).padStart(2, "0");
+    const secs = String(seconds % 60).padStart(2, "0");
+
+    display.textContent = `${mins}:${secs}`;
+  }
+
+  startBtn.addEventListener("click", () => {
+    if (interval) return;
+
+    interval = setInterval(() => {
+      seconds++;
+      updateDisplay();
+    }, 1000);
+  });
+
+  pauseBtn.addEventListener("click", () => {
+    clearInterval(interval);
+    interval = null;
+  });
+
+  resetBtn.addEventListener("click", () => {
+    clearInterval(interval);
+    interval = null;
+    seconds = 0;
+    updateDisplay();
+  });
+
+  updateDisplay();
+}
+
+function updateStats() {
+  const totalReps = sessions.reduce((sum, s) => sum + s.reps, 0);
+  const totalSets = sessions.reduce((sum, s) => sum + s.sets, 0);
+
+  totalRepsEl.textContent = totalReps;
+  totalSetsEl.textContent = totalSets;
+  totalSessionsEl.textContent = sessions.length;
+
+  restDaysEl.textContent = calculateRestDays();
+}
+
+function calculateRestDays() {
+  if (sessions.length === 0) return 0;
+
+  const today = new Date();
+  const latest = new Date(
+    sessions[sessions.length - 1].date
+  );
+
+  const diff =
+    (today - latest) / (1000 * 60 * 60 * 24);
+
+  return Math.floor(diff);
+}
+
+function renderLog() {
+  sessionLog.innerHTML = "";
+
+  sessions
+    .slice()
+    .reverse()
+    .forEach(session => {
+      const div = document.createElement("div");
+
+      div.className = "session-item";
+
+      div.innerHTML = `
+        <h3>${session.name}</h3>
+        <p>
+          Reps: ${session.reps} |
+          Sets: ${session.sets}
+        </p>
+        <p>${session.date}</p>
+        <p>${session.notes || ""}</p>
+      `;
+
+      sessionLog.appendChild(div);
+    });
+}
+
+const tabs = document.querySelectorAll(".tab");
+const panels = document.querySelectorAll(".tab-panel");
+
+tabs.forEach(tab => {
+  tab.addEventListener("click", () => {
+    tabs.forEach(t => t.classList.remove("active"));
+    panels.forEach(p => p.classList.remove("active"));
+
+    tab.classList.add("active");
+
+    document
+      .getElementById(tab.dataset.tab)
+      .classList.add("active");
+  });
+});
+
+const mealImageInput =
+  document.getElementById("mealImageInput");
+
+const mealPreview =
+  document.getElementById("mealPreview");
+
+mealImageInput.addEventListener("change", e => {
+  const file = e.target.files[0];
+
+  if (!file) return;
+
+  const reader = new FileReader();
+
+  reader.onload = event => {
+    mealPreview.src = event.target.result;
+    mealPreview.style.display = "block";
+  };
+
+  reader.readAsDataURL(file);
+});
+
+renderExercises();
+renderLog();
+updateStats();
