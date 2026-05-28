@@ -42,7 +42,7 @@ const exercises = [
   {
     name: "Headstand Push-Up",
     desc: "Wall-supported vertical pressing movement for shoulders and triceps.",
-    image: "headstand-pushup.png"
+    image: "headstand-pushup-new.png"
   }
 ];
 
