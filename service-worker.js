@@ -1,4 +1,4 @@
-const CACHE_NAME = "ascended-masters-pushup-tracker-v1";
+const CACHE_NAME = "ascended-masters-pushup-v9";
 
 const ASSETS = [
   "./",
@@ -14,7 +14,7 @@ const ASSETS = [
   "./assets/images/decline-pushup.png",
   "./assets/images/incline-pushup.png",
   "./assets/images/explosive-pushup.png",
-  "./assets/images/headstand-pushup.png"
+  "./assets/images/headstand-pushup-new.png"
 ];
 
 self.addEventListener("install", event => {
