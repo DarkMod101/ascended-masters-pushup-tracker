@@ -388,3 +388,59 @@ th {
     height: 190px;
   }
                    }
+
+
+
+.exercise-card {
+  background: linear-gradient(
+    145deg,
+    #111111,
+    #1c1c1c
+  );
+  border: 1px solid #3a3a3a;
+  border-radius: 18px;
+  padding: 16px;
+  margin-bottom: 22px;
+  box-shadow:
+    0 0 12px rgba(255,255,255,0.05),
+    inset 0 0 8px rgba(255,255,255,0.03);
+}
+
+.exercise-image {
+  width: 100%;
+  border-radius: 14px;
+  margin-bottom: 14px;
+  border: 1px solid #555;
+}
+
+.exercise-card h2 {
+  color: #d6d6d6;
+  font-size: 1.4rem;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.exercise-card p {
+  color: #9f9f9f;
+  line-height: 1.5;
+}
+
+.timer-box {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.timer-btn {
+  background: #2a2a2a;
+  color: silver;
+  border: 1px solid #666;
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.timer-btn:hover {
+  background: #3b3b3b;
+}
