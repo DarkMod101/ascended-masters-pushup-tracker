@@ -26,51 +26,7 @@ background-attachment: fixed;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-/* ==========================
-   ENGRAVED DASHBOARD SYMBOLS
-   ========================== */
 
-.stat-card{
-    position: relative;
-    overflow: hidden;
-}
-
-.stat-card::after{
-    position: absolute;
-    right: 14px;
-    bottom: 10px;
-
-    font-size: 54px;
-    font-weight: 900;
-
-    color: rgba(255,255,255,.04);
-
-    text-shadow:
-        1px 1px 1px rgba(255,255,255,.03),
-        -1px -1px 1px rgba(0,0,0,.35);
-
-    pointer-events: none;
-}
-
-/* TOTAL REPS */
-.stat-reps::after{
-    content: "💪";
-}
-
-/* TOTAL SETS */
-.stat-sets::after{
-    content: "▤";
-}
-
-/* SESSIONS */
-.stat-sessions::after{
-    content: "☑";
-}
-
-/* REST DAYS */
-.stat-rest::after{
-    content: "🛏";
-}
 .app {
   width: min(980px, 100%);
   margin: auto;
@@ -184,8 +140,23 @@ button:active {
 }
 
 .stat-card {
-  border-radius: 18px;
-  padding: 14px;
+    border-radius: 18px;
+    padding: 14px;
+
+    background:
+    linear-gradient(
+    180deg,
+    rgba(18,18,20,.88),
+    rgba(6,6,8,.88)
+    );
+
+    backdrop-filter: blur(10px);
+
+    border: 1px solid rgba(255,255,255,.10);
+
+    box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.06),
+    0 8px 24px rgba(0,0,0,.35);
 }
 
 .stat-card span {
