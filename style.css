@@ -570,3 +570,33 @@ th {
 .timer-box {
   border-radius: 22px;
 }
+
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.stat-card {
+  min-height: 115px;
+  padding: 18px 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card span,
+.stat-card strong {
+  position: relative;
+  z-index: 2;
+}
+
+.stat-card span {
+  margin-bottom: 10px;
+}
+
+.stat-card strong {
+  line-height: 1;
+}
