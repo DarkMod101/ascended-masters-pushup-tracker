@@ -103,13 +103,9 @@ h1 {
 }
 
 .quote-box {
-  border-radius: 22px;
-  padding: 16px;
-  margin: 10px 0 14px;
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  align-items: center;
+  background: rgba(8,8,10,.78);
+backdrop-filter: blur(12px);
+-webkit-backdrop-filter: blur(12px);
 }
 
 .quote-box p {
