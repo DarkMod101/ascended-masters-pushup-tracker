@@ -139,24 +139,12 @@ button:active {
   gap: 10px;
 }
 
-.stat-card {
-    border-radius: 18px;
-    padding: 14px;
-
-    background:
-    linear-gradient(
-    180deg,
-    rgba(18,18,20,.88),
-    rgba(6,6,8,.88)
-    );
-
-    backdrop-filter: blur(10px);
-
-    border: 1px solid rgba(255,255,255,.10);
-
-    box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.06),
-    0 8px 24px rgba(0,0,0,.35);
+.stat-card strong {
+  font-size: 27px;
+  color: #d7d7d7;
+  text-shadow:
+    0 1px 0 rgba(255,255,255,.18),
+    0 0 10px rgba(255,255,255,.08);
 }
 
 .stat-card span {
