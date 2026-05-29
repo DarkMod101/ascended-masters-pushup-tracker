@@ -157,70 +157,50 @@ button:active {
 }
 
 .tabs {
-    display: flex;
-    gap: 14px;
-    margin: 20px 0;
-    padding: 0;
-    background: transparent;
-    border: none;
-    box-shadow: none;
-    justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin: 20px 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
 }
 
 .tab {
+  width: 100%;
+  height: 44px;
+  padding: 0 6px;
+  border-radius: 15px;
 
-    flex: 0 0 auto;
+  background:
+    linear-gradient(180deg, rgba(48,50,55,.92), rgba(12,12,15,.94));
 
-    min-width: 88px;
-    padding: 0 18px;
+  border: 1px solid rgba(255,255,255,.16);
+  color: #d6d6d6;
+  font-size: 14px;
+  font-weight: 700;
 
-    height: 56px;
-
-    border-radius: 18px;
-
-    background:
-    background:
-      linear-gradient(
-        180deg,
-        rgba(45,45,50,.92),
-        rgba(12,12,15,.92)
-      );
-
-    border: 1px solid rgba(255,255,255,.12);
-
-    color: #d6d6d6;
-
-    font-size: 16px;
-    font-weight: 700;
-
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,.12),
-      0 6px 18px rgba(0,0,0,.35);
-
-    transition: .2s ease;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.14),
+    0 5px 14px rgba(0,0,0,.35);
 }
 
 .tab.active {
+  color: #fff;
+  background:
+    linear-gradient(180deg, rgba(155,155,155,.9), rgba(45,45,50,.95));
 
-    color: white;
+  border: 1px solid rgba(255,255,255,.42);
 
-    background:
-      linear-gradient(
-        180deg,
-        rgba(120,120,125,.95),
-        rgba(45,45,50,.95)
-      );
-
-    border: 1px solid rgba(255,255,255,.35);
-
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,.45),
-      0 0 12px rgba(255,255,255,.12),
-      0 8px 20px rgba(0,0,0,.45);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.55),
+    0 0 10px rgba(255,255,255,.13),
+    0 6px 16px rgba(0,0,0,.42);
 }
 
 .tab:active {
-    transform: scale(.97);
+  transform: scale(.97);
 }
 
 .tab-panel {
