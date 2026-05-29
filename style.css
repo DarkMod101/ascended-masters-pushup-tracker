@@ -164,15 +164,21 @@ button:active {
     background: transparent;
     border: none;
     box-shadow: none;
+    justify-content: space-between;
 }
 
 .tab {
-    flex: 1;
+
+    flex: 0 0 auto;
+
+    min-width: 88px;
+    padding: 0 18px;
 
     height: 56px;
 
     border-radius: 18px;
 
+    background:
     background:
       linear-gradient(
         180deg,
