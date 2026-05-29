@@ -514,3 +514,31 @@ th {
     inset 0 -1px 0 rgba(0,0,0,.8),
     0 14px 35px rgba(0,0,0,.48);
 }
+
+.quote-box,
+.stat-card,
+.exercise-card,
+.info-card,
+.session-item,
+.timer-box {
+  background:
+    linear-gradient(145deg, rgba(10,10,12,.82), rgba(0,0,0,.72));
+  border: 1px solid rgba(255,255,255,.18);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.12),
+    inset 0 -1px 0 rgba(0,0,0,.75),
+    0 18px 40px rgba(0,0,0,.48);
+}
+
+.quote-box,
+.exercise-card,
+.info-card {
+  border-radius: 28px;
+}
+
+.stat-card,
+.timer-box {
+  border-radius: 22px;
+}
