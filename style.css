@@ -26,6 +26,51 @@ background-attachment: fixed;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
+/* ==========================
+   ENGRAVED DASHBOARD SYMBOLS
+   ========================== */
+
+.stat-card{
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card::after{
+    position: absolute;
+    right: 14px;
+    bottom: 10px;
+
+    font-size: 54px;
+    font-weight: 900;
+
+    color: rgba(255,255,255,.04);
+
+    text-shadow:
+        1px 1px 1px rgba(255,255,255,.03),
+        -1px -1px 1px rgba(0,0,0,.35);
+
+    pointer-events: none;
+}
+
+/* TOTAL REPS */
+.stat-reps::after{
+    content: "💪";
+}
+
+/* TOTAL SETS */
+.stat-sets::after{
+    content: "▤";
+}
+
+/* SESSIONS */
+.stat-sessions::after{
+    content: "☑";
+}
+
+/* REST DAYS */
+.stat-rest::after{
+    content: "🛏";
+}
 .app {
   width: min(980px, 100%);
   margin: auto;
