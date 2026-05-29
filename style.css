@@ -600,3 +600,8 @@ th {
 .stat-card strong {
   line-height: 1;
 }
+
+.dashboard .stat-card {
+  min-height: 125px !important;
+  padding: 20px !important;
+}
