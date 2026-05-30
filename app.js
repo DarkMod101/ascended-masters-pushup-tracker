@@ -283,7 +283,13 @@ function renderLog() {
       div.className = "exercise-card log-card";
 
       const formattedDate = new Date(session.date).toLocaleString();
+const previousBest = sessions
+  .filter(entry => entry.name === session.name && entry.date !== session.date)
+  .reduce((best, entry) => Math.max(best, entry.reps), 0);
 
+const isPersonalRecord = session.reps > previousBest;
+const level = getPushupLevel(session.reps);
+      
       div.innerHTML = `
         <img src="${session.image}" class="exercise-img">
 
