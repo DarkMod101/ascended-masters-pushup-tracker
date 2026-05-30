@@ -79,6 +79,60 @@ randomQuote();
 const template = document.getElementById("exerciseTemplate");
 
 let sessions = JSON.parse(localStorage.getItem("ascensionSessions")) || [];
+const manualReps = document.getElementById("manualReps");
+const manualSets = document.getElementById("manualSets");
+const manualDate = document.getElementById("manualDate");
+const manualTime = document.getElementById("manualTime");
+const manualNotes = document.getElementById("manualNotes");
+const saveManualEntry = document.getElementById("saveManualEntry");
+
+if (saveManualEntry) {
+  saveManualEntry.addEventListener("click", () => {
+    const selectedExercise = exercises.find(
+      exercise => exercise.name === manualExercise.value
+    );
+
+    if (!selectedExercise) {
+      alert("Choose an exercise first.");
+      return;
+    }
+
+    const reps = Number(manualReps.value);
+    const sets = Number(manualSets.value);
+
+    if (!reps || !sets) {
+      alert("Enter reps and sets.");
+      return;
+    }
+
+    const dateValue = manualDate.value || new Date().toISOString().slice(0, 10);
+    const timeValue = manualTime.value || "12:00";
+
+    const entry = {
+      name: selectedExercise.name,
+      image: selectedExercise.image,
+      reps: reps,
+      sets: sets,
+      notes: manualNotes.value,
+      date: new Date(`${dateValue}T${timeValue}`).toISOString()
+    };
+
+    sessions.push(entry);
+    localStorage.setItem("sessions", JSON.stringify(sessions));
+
+    renderLog();
+    updateStats();
+    renderPerformanceChart();
+
+    manualReps.value = "";
+    manualSets.value = "";
+    manualDate.value = "";
+    manualTime.value = "";
+    manualNotes.value = "";
+
+    alert("Manual entry saved.");
+  });
+}
 
 function renderExercises() {
   exercises.forEach((exercise, index) => {
