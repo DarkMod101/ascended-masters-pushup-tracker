@@ -283,9 +283,13 @@ function renderExerciseRecords() {
 
         if (exerciseSessions.length === 0) return;
 
-        const best = Math.max(
-            ...exerciseSessions.map(session => session.reps)
-        );
+        const bestSession = exerciseSessions.reduce((best, current) => {
+  return current.reps > best.reps ? current : best;
+});
+
+const best = bestSession.reps;
+const bestDate = new Date(bestSession.date).toLocaleDateString();
+const bestLevel = getPushupLevel(bestSession.reps);
 
         const card = document.createElement("div");
 
