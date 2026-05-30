@@ -296,12 +296,24 @@ const bestLevel = getPushupLevel(bestSession.reps);
         card.className = "exercise-card";
 
         card.innerHTML = `
-            <img src="${exercise.image}" class="exercise-image">
+  <img src="${exercise.image}" class="exercise-img">
 
-            <h3>${exercise.name}</h3>
+  <h3>${exercise.name}</h3>
 
-            <p>🏆 Best Record: ${best} reps</p>
-        `;
+  <div class="record-badge">
+    🏆 Personal Record
+  </div>
+
+  <p><strong>Best Reps:</strong> ${best}</p>
+
+  <p><strong>Best Sets:</strong> ${bestSession.sets}</p>
+
+  <p><strong>Date Achieved:</strong> ${bestDate}</p>
+
+  <div class="level-badge">
+    Level: ${bestLevel}
+  </div>
+`;
 
         exerciseRecords.appendChild(card);
 
