@@ -295,6 +295,12 @@ const level = getPushupLevel(session.reps);
 
         <h3>${session.name}</h3>
 
+${isPersonalRecord ? `<div class="pr-badge">🏆 New Personal Record</div>` : ""}
+
+<div class="level-badge">
+  Level: ${level}
+</div>
+
         <p>Reps: ${session.reps} | Sets: ${session.sets}</p>
 
         <p>${formattedDate}</p>
