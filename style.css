@@ -673,3 +673,45 @@ th {
 .delete-log-btn:hover {
   border-color: rgba(255,120,120,.6);
 }
+
+.pr-badge {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  padding: 8px 12px;
+
+  border-radius: 12px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(214,175,55,.22),
+      rgba(214,175,55,.08)
+    );
+
+  border: 1px solid rgba(214,175,55,.35);
+
+  color: #f4d57a;
+  font-weight: 700;
+  text-align: center;
+}
+
+.level-badge {
+  margin-bottom: 10px;
+  padding: 8px 12px;
+
+  border-radius: 12px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(180,180,180,.12),
+      rgba(60,60,60,.12)
+    );
+
+  border: 1px solid rgba(255,255,255,.12);
+
+  color: #d7d7d7;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+}
