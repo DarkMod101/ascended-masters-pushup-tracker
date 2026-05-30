@@ -43,19 +43,19 @@ const exercises = [
     name: "Headstand Push-Up",
     desc: "Wall-supported vertical pressing movement for shoulders and triceps.",
     image: "headstand-pushup-new.png"
-  46 }
-47 ];
+  }
+ ];
 
-48 const manualExercise = document.getElementById("manualExercise");
+ const manualExercise = document.getElementById("manualExercise");
 
-49 if (manualExercise) {
-50   exercises.forEach(exercise => {
-51     const option = document.createElement("option");
-52     option.value = exercise.name;
-53     option.textContent = exercise.name;
-54     manualExercise.appendChild(option);
-55   });
-56 }
+ if (manualExercise) {
+   exercises.forEach(exercise => {
+     const option = document.createElement("option");
+     option.value = exercise.name;
+     option.textContent = exercise.name;
+     manualExercise.appendChild(option);
+   });
+ }
 
 const quoteText = document.getElementById("quoteText");
 const newQuoteBtn = document.getElementById("newQuoteBtn");
