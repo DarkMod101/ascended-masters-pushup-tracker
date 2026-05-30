@@ -61,7 +61,7 @@ const quoteText = document.getElementById("quoteText");
 const newQuoteBtn = document.getElementById("newQuoteBtn");
 const exerciseList = document.getElementById("exerciseList");
 const sessionLog = document.getElementById("sessionLog");
-
+const exerciseRecords = document.getElementById("exerciseRecords");
 const totalRepsEl = document.getElementById("totalReps");
 const totalSetsEl = document.getElementById("totalSets");
 const totalSessionsEl = document.getElementById("totalSessions");
