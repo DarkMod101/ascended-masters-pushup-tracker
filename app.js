@@ -263,9 +263,10 @@ function renderLog() {
   sessions
     .slice()
     .reverse()
-    .forEach(session => {
-      const div = document.createElement("div");
+    .forEach((session, index) => {
+      const realIndex = sessions.length - 1 - index;
 
+      const div = document.createElement("div");
       div.className = "exercise-card log-card";
 
       const formattedDate = new Date(session.date).toLocaleString();
@@ -275,17 +276,34 @@ function renderLog() {
 
         <h3>${session.name}</h3>
 
-        <p>
-          Reps: ${session.reps} | Sets: ${session.sets}
-        </p>
+        <p>Reps: ${session.reps} | Sets: ${session.sets}</p>
 
         <p>${formattedDate}</p>
 
         <p>${session.notes || ""}</p>
+
+        <button class="delete-log-btn" data-index="${realIndex}">
+          Delete Entry
+        </button>
       `;
 
       sessionLog.appendChild(div);
     });
+
+  document.querySelectorAll(".delete-log-btn").forEach(button => {
+    button.addEventListener("click", () => {
+      const index = Number(button.dataset.index);
+
+      if (confirm("Delete this workout entry?")) {
+        sessions.splice(index, 1);
+        localStorage.setItem("sessions", JSON.stringify(sessions));
+
+        renderLog();
+        updateStats();
+        renderPerformanceChart();
+      }
+    });
+  });
 }
 
 const tabs = document.querySelectorAll(".tab");
