@@ -269,6 +269,18 @@ function getPushupLevel(reps) {
   if (reps >= 20) return "Awakened Beginner";
   return "Starting Path";
 }
+
+function getMasteryRank(reps) {
+  if (reps >= 200) return "Mastery Rank VI";
+  if (reps >= 180) return "Mastery Rank V";
+  if (reps >= 160) return "Mastery Rank IV";
+  if (reps >= 140) return "Mastery Rank III";
+  if (reps >= 120) return "Mastery Rank II";
+  if (reps >= 100) return "Mastery Rank I";
+
+  return "Mastery Rank 0";
+}
+
 function renderExerciseRecords() {
 
     if (!exerciseRecords) return;
@@ -290,7 +302,8 @@ function renderExerciseRecords() {
 const best = bestSession.reps;
 const bestDate = new Date(bestSession.date).toLocaleDateString();
 const bestLevel = getPushupLevel(bestSession.reps);
-
+const bestRank = getMasteryRank(bestSession.reps);
+      
         const card = document.createElement("div");
 
         card.className = "exercise-card";
@@ -313,6 +326,10 @@ const bestLevel = getPushupLevel(bestSession.reps);
   <div class="level-badge">
     Level: ${bestLevel}
   </div>
+
+  <div class="rank-badge">
+👑 ${bestRank}
+</div>
 `;
 
         exerciseRecords.appendChild(card);
