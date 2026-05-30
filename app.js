@@ -426,32 +426,66 @@ renderLog();
 renderExerciseRecords();
 updateStats();
 
-function renderPerformanceChart() {
+let performanceChart = null;
+let currentGraphMode = "daily";
+
+function getGraphKey(date, mode) {
+  const d = new Date(date);
+
+  if (mode === "daily") {
+    return d.toLocaleDateString();
+  }
+
+  if (mode === "weekly") {
+    const start = new Date(d);
+    start.setDate(d.getDate() - d.getDay());
+    return "Week of " + start.toLocaleDateString();
+  }
+
+  if (mode === "monthly") {
+    return d.toLocaleString("default", {
+      month: "short",
+      year: "numeric"
+    });
+  }
+
+  if (mode === "yearly") {
+    return String(d.getFullYear());
+  }
+}
+
+function renderPerformanceChart(mode = currentGraphMode) {
+  currentGraphMode = mode;
+
   const canvas = document.getElementById("performanceChart");
   if (!canvas || typeof Chart === "undefined") return;
 
-  const dailyTotals = {};
+  const totals = {};
 
   sessions.forEach(session => {
-    const day = new Date(session.date).toLocaleDateString();
+    const key = getGraphKey(session.date, mode);
 
-    if (!dailyTotals[day]) {
-      dailyTotals[day] = 0;
+    if (!totals[key]) {
+      totals[key] = 0;
     }
 
-    dailyTotals[day] += session.reps;
+    totals[key] += Number(session.reps || 0);
   });
 
-  const labels = Object.keys(dailyTotals);
-  const data = Object.values(dailyTotals);
+  const labels = Object.keys(totals);
+  const data = Object.values(totals);
 
-  new Chart(canvas, {
+  if (performanceChart) {
+    performanceChart.destroy();
+  }
+
+  performanceChart = new Chart(canvas, {
     type: "line",
     data: {
       labels,
       datasets: [
         {
-          label: "Daily Reps",
+          label: mode.charAt(0).toUpperCase() + mode.slice(1) + " Reps",
           data,
           borderWidth: 2,
           tension: 0.35
@@ -482,6 +516,18 @@ function renderPerformanceChart() {
     }
   });
 }
+
+document.querySelectorAll(".graph-mode").forEach(button => {
+  button.addEventListener("click", () => {
+    document
+      .querySelectorAll(".graph-mode")
+      .forEach(btn => btn.classList.remove("active"));
+
+    button.classList.add("active");
+
+    renderPerformanceChart(button.dataset.mode);
+  });
+});
 
 renderPerformanceChart();
 
