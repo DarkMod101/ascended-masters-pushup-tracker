@@ -266,17 +266,21 @@ function renderLog() {
     .forEach(session => {
       const div = document.createElement("div");
 
-      div.className = "exercise-card";
+      div.className = "exercise-card log-card";
+
+      const formattedDate = new Date(session.date).toLocaleString();
 
       div.innerHTML = `
-      <img src="${session.image}" class="exercise-image">
-      
+        <img src="${session.image}" class="exercise-img">
+
         <h3>${session.name}</h3>
+
         <p>
-          Reps: ${session.reps} |
-          Sets: ${session.sets}
+          Reps: ${session.reps} | Sets: ${session.sets}
         </p>
-        <p>${session.date}</p>
+
+        <p>${formattedDate}</p>
+
         <p>${session.notes || ""}</p>
       `;
 
