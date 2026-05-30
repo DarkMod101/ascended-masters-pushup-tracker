@@ -303,6 +303,7 @@ const best = bestSession.reps;
 const bestDate = new Date(bestSession.date).toLocaleDateString();
 const bestLevel = getPushupLevel(bestSession.reps);
 const bestRank = getMasteryRank(bestSession.reps);
+const totalSessions = exerciseSessions.length;
       
         const card = document.createElement("div");
 
@@ -322,6 +323,8 @@ const bestRank = getMasteryRank(bestSession.reps);
   <p><strong>Best Sets:</strong> ${bestSession.sets}</p>
 
   <p><strong>Date Achieved:</strong> ${bestDate}</p>
+
+<p><strong>Total Sessions:</strong> ${totalSessions}</p>
 
   <div class="level-badge">
     Level: ${bestLevel}
