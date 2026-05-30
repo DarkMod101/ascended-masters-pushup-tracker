@@ -269,6 +269,41 @@ function getPushupLevel(reps) {
   if (reps >= 20) return "Awakened Beginner";
   return "Starting Path";
 }
+function renderExerciseRecords() {
+
+    if (!exerciseRecords) return;
+
+    exerciseRecords.innerHTML = "";
+
+    exercises.forEach(exercise => {
+
+        const exerciseSessions = sessions.filter(
+            session => session.name === exercise.name
+        );
+
+        if (exerciseSessions.length === 0) return;
+
+        const best = Math.max(
+            ...exerciseSessions.map(session => session.reps)
+        );
+
+        const card = document.createElement("div");
+
+        card.className = "exercise-card";
+
+        card.innerHTML = `
+            <img src="${exercise.image}" class="exercise-image">
+
+            <h3>${exercise.name}</h3>
+
+            <p>🏆 Best Record: ${best} reps</p>
+        `;
+
+        exerciseRecords.appendChild(card);
+
+    });
+
+}
 
 function renderLog() {
   sessionLog.innerHTML = "";
