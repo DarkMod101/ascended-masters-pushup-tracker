@@ -359,8 +359,9 @@ ${isPersonalRecord ? `<div class="pr-badge">🏆 New Personal Record</div>` : ""
         localStorage.setItem("sessions", JSON.stringify(sessions));
 
         renderLog();
-        updateStats();
-        renderPerformanceChart();
+renderExerciseRecords();
+updateStats();
+renderPerformanceChart();
       }
     });
   });
@@ -386,6 +387,7 @@ tabs.forEach(tab => {
 
 renderExercises();
 renderLog();
+renderExerciseRecords();
 updateStats();
 
 function renderPerformanceChart() {
