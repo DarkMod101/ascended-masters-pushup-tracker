@@ -256,6 +256,19 @@ function calculateRestDays() {
 
   return Math.floor(diff);
 }
+function getPushupLevel(reps) {
+  if (reps >= 200) return "Ascended Master";
+  if (reps >= 180) return "Elite Warrior";
+  if (reps >= 160) return "Iron Disciple";
+  if (reps >= 140) return "Power Adept";
+  if (reps >= 120) return "Strength Initiate";
+  if (reps >= 100) return "Century Warrior";
+  if (reps >= 80) return "Steel Builder";
+  if (reps >= 60) return "Foundation Breaker";
+  if (reps >= 40) return "Rising Disciple";
+  if (reps >= 20) return "Awakened Beginner";
+  return "Starting Path";
+}
 
 function renderLog() {
   sessionLog.innerHTML = "";
