@@ -649,3 +649,27 @@ th {
   width: 100%;
   margin-top: 4px;
 }
+
+.delete-log-btn {
+  width: 100%;
+  margin-top: 12px;
+  padding: 12px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(70,20,20,.95),
+      rgba(20,5,5,.95)
+    );
+
+  border: 1px solid rgba(255,120,120,.25);
+  border-radius: 12px;
+
+  color: #ffffff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.delete-log-btn:hover {
+  border-color: rgba(255,120,120,.6);
+}
