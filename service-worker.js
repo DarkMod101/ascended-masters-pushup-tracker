@@ -1,4 +1,4 @@
-const CACHE_NAME = "ascended-masters-pushup-v48";
+const CACHE_NAME = "ascended-masters-pushup-v49";
 const ASSETS = [
   "./",
   "./index.html",
