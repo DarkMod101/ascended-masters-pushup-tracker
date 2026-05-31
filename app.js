@@ -495,7 +495,11 @@ function renderPerformanceChart(mode = currentGraphMode) {
 
   const totals = {};
 
-  sessions.forEach(session => {
+  const filteredSessions = exerciseFilter && exerciseFilter.value !== "all"
+  ? sessions.filter(session => session.name === exerciseFilter.value)
+  : sessions;
+
+filteredSessions.forEach(session => {
     const key = getGraphKey(session.date, mode);
 
     if (!totals[key]) {
@@ -568,6 +572,12 @@ document.querySelectorAll(".graph-mode").forEach(button => {
     renderPerformanceChart(button.dataset.mode);
   });
 });
+
+if (exerciseFilter) {
+  exerciseFilter.addEventListener("change", () => {
+    renderPerformanceChart(currentGraphMode);
+  });
+}
 
 renderPerformanceChart();
 
