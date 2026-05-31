@@ -853,3 +853,45 @@ th {
     inset 0 1px 0 rgba(255,255,255,.14),
     0 6px 16px rgba(0,0,0,.36);
 }
+
+.current-view-card {
+  margin: 0 auto 14px;
+  padding: 12px 14px;
+  max-width: 360px;
+
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(20,20,22,.92),
+      rgba(5,5,7,.96)
+    );
+
+  border: 1px solid rgba(255,255,255,.14);
+
+  text-align: center;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.08),
+    0 8px 20px rgba(0,0,0,.35);
+}
+
+.current-view-card span {
+  display: block;
+  margin-bottom: 5px;
+
+  color: #aaa;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.current-view-card strong {
+  display: block;
+
+  color: #f1f1f1;
+  font-size: 14px;
+  font-weight: 800;
+}
