@@ -814,3 +814,42 @@ th {
     inset 0 1px 0 rgba(255,255,255,.12),
     0 4px 12px rgba(0,0,0,.25);
 }
+
+.exercise-filter-container {
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto 14px;
+  text-align: center;
+}
+
+.exercise-filter-container label {
+  display: block;
+  margin-bottom: 7px;
+  color: #d7d7d7;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+#exerciseFilter {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 16px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(42,44,48,.96),
+      rgba(8,8,10,.96)
+    );
+
+  border: 1px solid rgba(255,255,255,.18);
+  color: #f1f1f1;
+  font-weight: 700;
+  text-align: center;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.14),
+    0 6px 16px rgba(0,0,0,.36);
+}
