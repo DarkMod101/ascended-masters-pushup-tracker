@@ -452,6 +452,9 @@ tabs.forEach(tab => {
 
 
 renderExercises();
+
+populateExerciseFilter();
+
 renderLog();
 renderExerciseRecords();
 updateStats();
