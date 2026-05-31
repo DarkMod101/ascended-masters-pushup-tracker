@@ -62,6 +62,7 @@ const newQuoteBtn = document.getElementById("newQuoteBtn");
 const exerciseList = document.getElementById("exerciseList");
 const sessionLog = document.getElementById("sessionLog");
 const exerciseRecords = document.getElementById("exerciseRecords");
+const exerciseFilter = document.getElementById("exerciseFilter");
 const totalRepsEl = document.getElementById("totalReps");
 const totalSetsEl = document.getElementById("totalSets");
 const totalSessionsEl = document.getElementById("totalSessions");
@@ -132,6 +133,29 @@ if (saveManualEntry) {
 
     alert("Manual entry saved.");
   });
+}
+
+function populateExerciseFilter() {
+
+  if (!exerciseFilter) return;
+
+  exerciseFilter.innerHTML = `
+    <option value="all">
+      All Exercises
+    </option>
+  `;
+
+  exercises.forEach(exercise => {
+
+    const option = document.createElement("option");
+
+    option.value = exercise.name;
+    option.textContent = exercise.name;
+
+    exerciseFilter.appendChild(option);
+
+  });
+
 }
 
 function renderExercises() {
