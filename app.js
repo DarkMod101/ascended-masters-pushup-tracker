@@ -364,6 +364,7 @@ const previousBest = sessions
 
 const isPersonalRecord = session.reps > previousBest;
 const level = getPushupLevel(session.reps);
+const milestoneReached = isMilestone(session.reps);
       
       div.innerHTML = `
         <img src="${session.image}" class="exercise-img">
@@ -371,6 +372,7 @@ const level = getPushupLevel(session.reps);
         <h3>${session.name}</h3>
 
 ${isPersonalRecord ? `<div class="pr-badge">🏆 New Personal Record</div>` : ""}
+${milestoneReached ? `<div class="milestone-badge">⚡ Milestone Reached: ${session.reps} Reps</div>` : ""}
 
 <div class="level-badge">
   Level: ${level}
