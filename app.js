@@ -281,6 +281,10 @@ function getMasteryRank(reps) {
   return "Mastery Rank 0";
 }
 
+function isMilestone(reps) {
+  return reps >= 20 && reps % 20 === 0;
+}
+
 function renderExerciseRecords() {
 
     if (!exerciseRecords) return;
