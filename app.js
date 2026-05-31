@@ -475,8 +475,12 @@ function renderPerformanceChart(mode = currentGraphMode) {
       totals[key] = 0;
     }
 
-    totals[key] += Number(session.reps || 0);
-  });
+    if (mode === "volume") {
+  totals[key] += Number(session.reps || 0) * Number(session.sets || 1);
+} else {
+  totals[key] += Number(session.reps || 0);
+    }
+    });
 
   const labels = Object.keys(totals);
   const data = Object.values(totals);
@@ -491,7 +495,10 @@ function renderPerformanceChart(mode = currentGraphMode) {
       labels,
       datasets: [
         {
-          label: mode.charAt(0).toUpperCase() + mode.slice(1) + " Reps",
+          label: mode === "volume"
+  ? "Training Volume"
+  : mode.charAt(0).toUpperCase() + mode.slice(1) + " Reps",
+         
           data,
           borderWidth: 2,
           tension: 0.35
