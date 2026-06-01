@@ -40,16 +40,19 @@ background-attachment: fixed;
   padding: 18px 0;
 }
 
-.logo-mark {
-  width: 110px;
-  height: 110px;
+.logo-mark{
+    width:140px;
+    height:140px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 }
 
 .logo-mark img{
     width:100%;
     height:100%;
     object-fit:contain;
-    transform:scale(1.8);
+    transform:scale(2.3);
 }
 
 .eyebrow {
