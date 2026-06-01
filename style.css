@@ -1062,3 +1062,18 @@ th {
   height: auto;
   margin-bottom: 10px;
 }
+
+.hero{
+    display:block;
+    text-align:center;
+    padding:18px 0;
+}
+
+.floating-logo{
+    width:100px;
+    height:100px;
+    display:block;
+    margin:0 auto 10px auto;
+    object-fit:contain;
+    filter: drop-shadow(0 0 10px rgba(255,190,80,.35));
+}
