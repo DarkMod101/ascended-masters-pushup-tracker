@@ -1052,3 +1052,16 @@ th {
 .rank-item:active {
   transform: scale(1.01);
 }
+
+.tracker-title {
+    margin-top: 4px;
+    margin-bottom: 6px;
+
+    font-size: 1.15rem;
+
+    font-weight: 500;
+
+    color: rgba(255,255,255,0.85);
+
+    letter-spacing: 1px;
+}
