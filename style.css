@@ -984,18 +984,34 @@ th {
     background:rgba(255,255,255,.04);
 }
 
-.rank-item strong{
+.rank-item strong {
     display:block;
 
     color:#f0f0f0;
+
+    font-size:1rem;
+
+    line-height:1.4;
 }
 
-.rank-item span{
+.rank-item span {
     display:block;
 
-    margin-top:4px;
+    margin-top:6px;
 
     color:#ff4040;
 
-    font-size:.9rem;
+    font-size:.85rem;
+
+    letter-spacing:1px;
+
+    text-transform:uppercase;
+}
+
+.rank-item:hover {
+    border:1px solid rgba(255,255,255,.15);
+
+    transform:translateY(-1px);
+
+    transition:.2s ease;
 }
