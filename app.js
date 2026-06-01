@@ -677,3 +677,16 @@ resetDataBtn.addEventListener("click", () => {
 
   alert("All stats reset.");
 });
+
+const splashScreen = document.getElementById("splash-screen");
+const splashVideo = document.getElementById("splash-video");
+
+if (splashScreen && splashVideo) {
+  splashVideo.addEventListener("ended", () => {
+    splashScreen.classList.add("fade-out");
+
+    setTimeout(() => {
+      splashScreen.style.display = "none";
+    }, 1000);
+  });
+}
