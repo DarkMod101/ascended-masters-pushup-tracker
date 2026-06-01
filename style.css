@@ -41,28 +41,15 @@ background-attachment: fixed;
 }
 
 .logo-mark {
-  width: 64px;
-  height: 64px;
-  border-radius: 18px;
-  display: grid;
-  place-items: center;
-  font-weight: 900;
-  font-size: 22px;
-  letter-spacing: -1px;
-  color: white;
-  background:
-    linear-gradient(145deg, #2c2f35, #090909),
-    radial-gradient(circle, rgba(255,255,255,.2), transparent);
-  border: 1px solid var(--line);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.22),
-    0 18px 44px rgba(0,0,0,.55);
+  width: 110px;
+  height: 110px;
 }
 
-.logo-mark img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+.logo-mark img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    transform:scale(1.8);
 }
 
 .eyebrow {
