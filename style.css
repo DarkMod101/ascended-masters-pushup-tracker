@@ -1065,3 +1065,11 @@ th {
 
     letter-spacing: 1px;
 }
+
+.header-logo-text {
+  display: block;
+  width: 100%;
+  max-width: 380px;
+  height: auto;
+  margin-bottom: 10px;
+}
