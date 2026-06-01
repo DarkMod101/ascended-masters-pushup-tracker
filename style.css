@@ -895,3 +895,52 @@ th {
   font-size: 14px;
   font-weight: 800;
 }
+
+.dashboard-strip {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+
+    padding: 18px;
+
+    margin-bottom: 20px;
+
+    background: rgba(0,0,0,0.45);
+
+    border: 1px solid rgba(255,255,255,0.12);
+
+    border-radius: 18px;
+
+    backdrop-filter: blur(10px);
+}
+
+.dashboard-stat {
+    flex: 1;
+    text-align: center;
+}
+
+.dashboard-value {
+    font-family: "Courier New", monospace;
+
+    font-size: 2rem;
+
+    font-weight: 700;
+
+    color: #ff2f2f;
+
+    text-shadow:
+        0 0 5px rgba(255,0,0,0.8),
+        0 0 12px rgba(255,0,0,0.4);
+}
+
+.dashboard-label {
+    margin-top: 6px;
+
+    font-size: 0.8rem;
+
+    letter-spacing: 1px;
+
+    text-transform: uppercase;
+
+    color: #c8c8c8;
+}
