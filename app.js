@@ -63,6 +63,7 @@ const exerciseList = document.getElementById("exerciseList");
 const sessionLog = document.getElementById("sessionLog");
 const exerciseRecords = document.getElementById("exerciseRecords");
 const exerciseFilter = document.getElementById("exerciseFilter");
+const currentViewText = document.getElementById("currentViewText");
 const totalRepsEl = document.getElementById("totalReps");
 const totalSetsEl = document.getElementById("totalSets");
 const totalSessionsEl = document.getElementById("totalSessions");
@@ -462,6 +463,22 @@ updateStats();
 let performanceChart = null;
 let currentGraphMode = "daily";
 
+function updateCurrentView() {
+  if (!currentViewText) return;
+
+  const exerciseName =
+    exerciseFilter && exerciseFilter.value !== "all"
+      ? exerciseFilter.value
+      : "All Exercises";
+
+  const modeName =
+    currentGraphMode.charAt(0).toUpperCase() +
+    currentGraphMode.slice(1);
+
+  currentViewText.textContent =
+    `${exerciseName} • ${modeName} Progress`;
+}
+
 function getGraphKey(date, mode) {
   const d = new Date(date);
 
@@ -490,6 +507,8 @@ function getGraphKey(date, mode) {
 function renderPerformanceChart(mode = currentGraphMode) {
   currentGraphMode = mode;
 
+  updateCurrentView();
+  
   const canvas = document.getElementById("performanceChart");
   if (!canvas || typeof Chart === "undefined") return;
 
