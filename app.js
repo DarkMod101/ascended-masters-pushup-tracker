@@ -266,6 +266,33 @@ function updateStats() {
   totalSessionsEl.textContent = sessions.length;
 
   restDaysEl.textContent = calculateRestDays();
+
+  const lifetimeReps =
+    sessions.reduce(
+        (sum, session) =>
+            sum + Number(session.reps || 0),
+        0
+    );
+
+const totalSessions =
+    sessions.length;
+
+const bestSet =
+    Math.max(
+        0,
+        ...sessions.map(
+            s => Number(s.reps || 0)
+        )
+    );
+
+document.getElementById("lifetimeReps").textContent =
+    lifetimeReps.toLocaleString();
+
+document.getElementById("totalSessions").textContent =
+    totalSessions;
+
+document.getElementById("bestSet").textContent =
+    bestSet;
 }
 
 function calculateRestDays() {
