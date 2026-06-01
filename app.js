@@ -490,6 +490,20 @@ updateStats();
 let performanceChart = null;
 let currentGraphMode = "daily";
 
+const rankImages = {
+  starting_path: "images/ranks/rank01_starting_path.png",
+  awakened_beginner: "images/ranks/rank02_awakened_beginner.png",
+  rising_disciple: "images/ranks/rank03_rising_disciple.png",
+  foundation_breaker: "images/ranks/rank04_foundation_breaker.png",
+  steel_builder: "images/ranks/rank05_steel_builder.png",
+  century_warrior: "images/ranks/rank06_century_warrior.png",
+  strength_initiate: "images/ranks/rank07_strength_initiate.png",
+  power_adept: "images/ranks/rank08_power_adept.png",
+  iron_disciple: "images/ranks/rank09_iron_disciple.png",
+  elite_warrior: "images/ranks/rank10_elite_warrior.png",
+  ascended_master: "images/ranks/rank11_ascended_master.png"
+};
+
 function updateCurrentView() {
   if (!currentViewText) return;
 
@@ -626,6 +640,23 @@ if (exerciseFilter) {
 }
 
 renderPerformanceChart();
+
+const viewer = document.getElementById("rankImageViewer");
+const rankImage = document.getElementById("rankImage");
+
+document.querySelectorAll(".rank-item").forEach(rank => {
+  rank.addEventListener("click", () => {
+    const rankKey = rank.dataset.rank;
+
+    rankImage.src = rankImages[rankKey];
+
+    viewer.classList.remove("hidden");
+  });
+});
+
+rankImage.addEventListener("click", () => {
+  viewer.classList.add("hidden");
+});
 
 const resetDataBtn = document.getElementById("resetDataBtn");
 
