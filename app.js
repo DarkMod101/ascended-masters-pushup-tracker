@@ -120,8 +120,7 @@ if (saveManualEntry) {
     };
 
     sessions.push(entry);
-    localStorage.setItem("sessions", JSON.stringify(sessions));
-
+    localStorage.setItem("ascensionSessions", JSON.stringify(sessions));
     renderLog();
     updateStats();
     renderPerformanceChart();
@@ -667,7 +666,7 @@ resetDataBtn.addEventListener("click", () => {
 
   if (!confirmed) return;
 
-  localStorage.removeItem("sessions");
+  localStorage.removeItem("ascensionSessions");
 
   sessions = [];
 
