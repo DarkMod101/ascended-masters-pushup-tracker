@@ -449,7 +449,7 @@ ${milestoneReached ? `<div class="milestone-badge">⚡ Milestone Reached: ${sess
 
       if (confirm("Delete this workout entry?")) {
         sessions.splice(index, 1);
-        localStorage.setItem("sessions", JSON.stringify(sessions));
+        localStorage.setItem("ascensionSessions", JSON.stringify(sessions));
 
         renderLog();
 renderExerciseRecords();
