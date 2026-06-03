@@ -287,7 +287,8 @@ const bestSet =
 document.getElementById("lifetimeReps").textContent =
     lifetimeReps.toLocaleString();
 
-document.getElementById("scoreboardSessions").textContent = totalSessions;
+document.getElementById("scoreboardSessions").textContent =
+  totalSessions;
 
 document.getElementById("bestSet").textContent =
     bestSet;
