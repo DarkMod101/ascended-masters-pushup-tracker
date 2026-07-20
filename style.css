@@ -1100,3 +1100,64 @@ th {
   height: 100%;
   object-fit: cover;
 }
+
+
+.backup-panel {
+  margin-top: 24px;
+  padding: 22px;
+  border: 1px solid rgba(205, 145, 72, 0.55);
+  border-radius: 16px;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(42, 31, 24, 0.96),
+      rgba(10, 10, 10, 0.98)
+    );
+  box-shadow:
+    inset 0 1px 0 rgba(255, 218, 160, 0.12),
+    0 10px 30px rgba(0, 0, 0, 0.45);
+  text-align: center;
+}
+
+.backup-panel h2 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+
+.backup-description {
+  margin: 0 auto 18px;
+  color: #b8b1a8;
+  line-height: 1.5;
+}
+
+.backup-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.backup-actions button {
+  min-width: 145px;
+  padding: 12px 18px;
+  border: 1px solid #a96f36;
+  border-radius: 10px;
+  background:
+    linear-gradient(
+      180deg,
+      #58361f,
+      #24150d
+    );
+  color: #f2dfc1;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 225, 175, 0.2),
+    0 5px 12px rgba(0, 0, 0, 0.4);
+}
+
+.backup-actions button:active {
+  transform: translateY(1px);
+}
