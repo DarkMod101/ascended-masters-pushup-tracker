@@ -670,9 +670,10 @@ resetDataBtn.addEventListener("click", () => {
 
   sessions = [];
 
-  updateStats();
-  renderLog();
-  renderPerformanceChart();
+updateStats();
+renderLog();
+renderExerciseRecords();
+renderPerformanceChart();
 
   alert("All stats reset.");
 });
@@ -687,5 +688,420 @@ if (splashScreen && splashVideo) {
     setTimeout(() => {
       splashScreen.style.display = "none";
     }, 1000);
+  });
+}
+
+// ========================================
+// PROGRESS BACKUP — CSV EXPORT AND IMPORT
+// ========================================
+
+const exportCsvBtn = document.getElementById("exportCsvBtn");
+const importCsvBtn = document.getElementById("importCsvBtn");
+const csvFileInput = document.getElementById("csvFileInput");
+
+const CSV_HEADERS = [
+  "name",
+  "image",
+  "reps",
+  "sets",
+  "notes",
+  "date"
+];
+
+/**
+ * Escapes a value so commas, quotation marks,
+ * and line breaks remain valid inside a CSV file.
+ */
+function escapeCsvValue(value) {
+  const text = String(value ?? "");
+
+  return `"${text.replace(/"/g, '""')}"`;
+}
+
+/**
+ * Produces a YYYY-MM-DD date for the backup filename.
+ */
+function getBackupDate() {
+  return new Date().toISOString().slice(0, 10);
+}
+
+/**
+ * Exports every saved workout session as an
+ * Excel-compatible CSV file.
+ */
+function exportProgressToCsv() {
+  if (sessions.length === 0) {
+    alert("There is no workout progress to export.");
+    return;
+  }
+
+  const rows = [
+    CSV_HEADERS.join(",")
+  ];
+
+  sessions.forEach(session => {
+    const row = CSV_HEADERS.map(header => {
+      return escapeCsvValue(session[header]);
+    });
+
+    rows.push(row.join(","));
+  });
+
+  /*
+   * The BOM helps Microsoft Excel recognize
+   * the CSV file's character encoding correctly.
+   */
+  const csvContent = "\uFEFF" + rows.join("\r\n");
+
+  const blob = new Blob(
+    [csvContent],
+    {
+      type: "text/csv;charset=utf-8;"
+    }
+  );
+
+  const downloadUrl = URL.createObjectURL(blob);
+  const downloadLink = document.createElement("a");
+
+  downloadLink.href = downloadUrl;
+  downloadLink.download =
+    `ascended-masters-progress-${getBackupDate()}.csv`;
+
+  document.body.appendChild(downloadLink);
+  downloadLink.click();
+  downloadLink.remove();
+
+  URL.revokeObjectURL(downloadUrl);
+
+  alert(
+    `${sessions.length} workout session${
+      sessions.length === 1 ? "" : "s"
+    } exported successfully.`
+  );
+}
+
+/**
+ * Parses CSV text while safely supporting:
+ *
+ * - Commas inside notes
+ * - Quotation marks
+ * - Multiline notes
+ * - Windows and Android line endings
+ */
+function parseCsv(csvText) {
+  const rows = [];
+
+  let currentRow = [];
+  let currentValue = "";
+  let insideQuotes = false;
+
+  for (let index = 0; index < csvText.length; index++) {
+    const character = csvText[index];
+    const nextCharacter = csvText[index + 1];
+
+    if (character === '"') {
+      if (insideQuotes && nextCharacter === '"') {
+        currentValue += '"';
+        index++;
+      } else {
+        insideQuotes = !insideQuotes;
+      }
+
+      continue;
+    }
+
+    if (character === "," && !insideQuotes) {
+      currentRow.push(currentValue);
+      currentValue = "";
+      continue;
+    }
+
+    if (
+      (character === "\n" || character === "\r") &&
+      !insideQuotes
+    ) {
+      if (
+        character === "\r" &&
+        nextCharacter === "\n"
+      ) {
+        index++;
+      }
+
+      currentRow.push(currentValue);
+
+      const rowHasContent = currentRow.some(
+        value => String(value).trim() !== ""
+      );
+
+      if (rowHasContent) {
+        rows.push(currentRow);
+      }
+
+      currentRow = [];
+      currentValue = "";
+      continue;
+    }
+
+    currentValue += character;
+  }
+
+  currentRow.push(currentValue);
+
+  const finalRowHasContent = currentRow.some(
+    value => String(value).trim() !== ""
+  );
+
+  if (finalRowHasContent) {
+    rows.push(currentRow);
+  }
+
+  return rows;
+}
+
+/**
+ * Converts CSV rows into workout session objects.
+ */
+function convertCsvRowsToSessions(rows) {
+  if (rows.length < 2) {
+    throw new Error(
+      "The CSV file does not contain any workout sessions."
+    );
+  }
+
+  const headers = rows[0].map(header =>
+    String(header)
+      .replace(/^\uFEFF/, "")
+      .trim()
+      .toLowerCase()
+  );
+
+  const missingHeaders = CSV_HEADERS.filter(
+    requiredHeader => !headers.includes(requiredHeader)
+  );
+
+  if (missingHeaders.length > 0) {
+    throw new Error(
+      `Missing required columns: ${missingHeaders.join(", ")}`
+    );
+  }
+
+  const importedSessions = [];
+  let skippedRows = 0;
+
+  rows.slice(1).forEach((row, rowIndex) => {
+    const record = {};
+
+    headers.forEach((header, columnIndex) => {
+      record[header] = row[columnIndex] ?? "";
+    });
+
+    const exerciseName = String(record.name || "").trim();
+
+    const matchingExercise = exercises.find(
+      exercise => exercise.name === exerciseName
+    );
+
+    const reps = Number(record.reps);
+    const sets = Number(record.sets);
+    const parsedDate = new Date(record.date);
+
+    const validEntry =
+      matchingExercise &&
+      Number.isFinite(reps) &&
+      Number.isFinite(sets) &&
+      reps > 0 &&
+      sets > 0 &&
+      !Number.isNaN(parsedDate.getTime());
+
+    if (!validEntry) {
+      console.warn(
+        `Skipped invalid CSV row ${rowIndex + 2}`,
+        record
+      );
+
+      skippedRows++;
+      return;
+    }
+
+    importedSessions.push({
+      name: matchingExercise.name,
+
+      /*
+       * Use the current app image path instead of
+       * trusting an edited or outdated CSV value.
+       */
+      image: matchingExercise.image,
+
+      reps: reps,
+      sets: sets,
+      notes: String(record.notes || ""),
+      date: parsedDate.toISOString()
+    });
+  });
+
+  return {
+    importedSessions,
+    skippedRows
+  };
+}
+
+/**
+ * Creates a stable comparison key so merging
+ * a backup does not duplicate identical entries.
+ */
+function createSessionKey(session) {
+  return JSON.stringify({
+    name: session.name,
+    reps: Number(session.reps),
+    sets: Number(session.sets),
+    notes: String(session.notes || ""),
+    date: new Date(session.date).toISOString()
+  });
+}
+
+/**
+ * Merges imported entries while removing exact duplicates.
+ */
+function mergeSessions(existingSessions, importedSessions) {
+  const combinedSessions = [
+    ...existingSessions,
+    ...importedSessions
+  ];
+
+  const uniqueSessions = [];
+  const knownSessionKeys = new Set();
+
+  combinedSessions.forEach(session => {
+    const sessionKey = createSessionKey(session);
+
+    if (!knownSessionKeys.has(sessionKey)) {
+      knownSessionKeys.add(sessionKey);
+      uniqueSessions.push(session);
+    }
+  });
+
+  return uniqueSessions;
+}
+
+/**
+ * Refreshes every section affected by imported progress.
+ */
+function refreshProgressDisplay() {
+  renderLog();
+  renderExerciseRecords();
+  updateStats();
+  renderPerformanceChart(currentGraphMode);
+}
+
+/**
+ * Handles the selected CSV backup file.
+ */
+async function importProgressFromCsv(file) {
+  if (!file) return;
+
+  const fileName = file.name.toLowerCase();
+
+  if (!fileName.endsWith(".csv")) {
+    alert("Please select an Ascended Masters CSV backup file.");
+    return;
+  }
+
+  try {
+    const csvText = await file.text();
+    const parsedRows = parseCsv(csvText);
+
+    const {
+      importedSessions,
+      skippedRows
+    } = convertCsvRowsToSessions(parsedRows);
+
+    if (importedSessions.length === 0) {
+      throw new Error(
+        "No valid workout sessions were found in this backup."
+      );
+    }
+
+    let replaceExistingProgress = true;
+
+    if (sessions.length > 0) {
+      replaceExistingProgress = confirm(
+        `${importedSessions.length} valid sessions were found.\n\n` +
+        "Press OK to REPLACE your current progress.\n\n" +
+        "Press Cancel to MERGE the backup with your current progress."
+      );
+    }
+
+    if (replaceExistingProgress) {
+      sessions = importedSessions;
+    } else {
+      sessions = mergeSessions(
+        sessions,
+        importedSessions
+      );
+    }
+
+    /*
+     * Sort chronologically so rest-day calculations
+     * continue to use the newest session correctly.
+     */
+    sessions.sort((firstSession, secondSession) => {
+      return (
+        new Date(firstSession.date) -
+        new Date(secondSession.date)
+      );
+    });
+
+    localStorage.setItem(
+      "ascensionSessions",
+      JSON.stringify(sessions)
+    );
+
+    refreshProgressDisplay();
+
+    let completionMessage =
+      `${importedSessions.length} workout session${
+        importedSessions.length === 1 ? "" : "s"
+      } imported successfully.`;
+
+    if (skippedRows > 0) {
+      completionMessage +=
+        `\n\n${skippedRows} invalid row${
+          skippedRows === 1 ? " was" : "s were"
+        } skipped.`;
+    }
+
+    alert(completionMessage);
+  } catch (error) {
+    console.error("CSV import failed:", error);
+
+    alert(
+      "The progress file could not be imported.\n\n" +
+      error.message
+    );
+  } finally {
+    /*
+     * Resetting the file input allows the same
+     * backup file to be selected again later.
+     */
+    csvFileInput.value = "";
+  }
+}
+
+if (exportCsvBtn) {
+  exportCsvBtn.addEventListener(
+    "click",
+    exportProgressToCsv
+  );
+}
+
+if (importCsvBtn && csvFileInput) {
+  importCsvBtn.addEventListener("click", () => {
+    csvFileInput.click();
+  });
+
+  csvFileInput.addEventListener("change", event => {
+    const selectedFile = event.target.files[0];
+
+    importProgressFromCsv(selectedFile);
   });
 }
