@@ -1119,16 +1119,24 @@ th {
   text-align: center;
 }
 
-.backup-panel h2 {
-  margin-top: 0;
-  margin-bottom: 8px;
-  letter-spacing: 1px;
+.backup-panel h2{
+    margin-top: 0;
+    margin-bottom: 8px;
+
+    color:#d6b46a;
+
+    text-shadow:
+        0 0 8px rgba(214,180,106,.18);
+
+    letter-spacing:1px;
 }
 
-.backup-description {
-  margin: 0 auto 18px;
-  color: #b8b1a8;
-  line-height: 1.5;
+.backup-description{
+    margin:0 auto 18px;
+
+    color:#c8c1b4;
+
+    line-height:1.6;
 }
 
 .backup-actions {
